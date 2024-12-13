@@ -22,5 +22,10 @@ export const selectSql = {
         const sql = `select * from costumer where email = ? and phone = ?`;
         const [result] = await promisePool.query(sql, [email, phone]);
         return result;
+    },
+    getBooks: async () => {
+        const sql = `select * from book`;
+        const [result] = await promisePool.query(sql);
+        return result;
     }
 }

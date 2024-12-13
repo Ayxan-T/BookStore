@@ -6,9 +6,14 @@ const router = express.Router();
 
 router.use(cookieParser());              
 
-router.get('/', (req, res) => {
+router.get('/',async (req, res) => {
     if (req.cookies.user && req.cookies.user.role === 'admin') {
-            res.render('admin');
+        const Books = await selectSql.getBooks();
+            res.render('admin', {
+                'books': Books,
+                'userRole': req.cookies.user.role,
+                'userId': req.cookies.user.id,
+            });
     } else {
         res.redirect('/');
     }
