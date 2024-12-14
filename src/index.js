@@ -7,6 +7,7 @@ import loginRouter from '../routes/login';
 import adminRouter from '../routes/admin';
 import costumerRouter from '../routes/costumer';
 import logoutRouter from '../routes/logout';
+import deleteRouter from '../routes/delete';
 //
 
 const PORT = 3000;  
@@ -33,6 +34,7 @@ app.use('/', loginRouter);
 app.use('/admin', adminRouter);
 app.use('/costumer', costumerRouter);
 app.use("/logout", logoutRouter);
+app.use("/delete", deleteRouter);
 //
 
 app.listen(PORT, () => {
