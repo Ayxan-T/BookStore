@@ -110,3 +110,37 @@ export const deleteSql = {
         console.log('contains deleted')
     }
 }
+
+export const insertSql = {
+    insertBook: async (isbn, title, year, price_dollars, category) => {
+        const sql = `INSERT INTO book VALUES(?, ?, ?, ?, ?)`;
+        await promisePool.query(sql, [isbn, title, year, price_dollars, category]);
+        console.log('book inserted');
+    },
+    insertAuthor: async (name, address, url) => {
+        const sql = `INSERT INTO author VALUES(?, ?, ?)`;
+        await promisePool.query(sql, [name, address, url]);
+        console.log('author inserted');
+    },
+    insertAward: async (id, name, year) => {
+        const sql = `INSERT INTO award VALUES(?, ?, ?)`;
+        await promisePool.query(sql, [id, name, year]);
+        console.log('award inserted');
+    },
+    insertWarehouse: async (code, phone, address) => {
+        const sql = `INSERT INTO warehouse VALUES(?, ?, ?)`;
+        await promisePool.query(sql, [code, phone, address]);
+        console.log('warehouse inserted');
+    },
+    insertInventory: async (book_isbn, warehouse_code, number) => {
+        const sql = `INSERT INTO inventory VALUES(?, ?, ?)`;
+        await promisePool.query(sql, [book_isbn, warehouse_code, number]);
+        console.log('inventory inserted');
+    },
+    insertContains: async (book_isbn, shopping_basket_basket_id, number) => {
+        const sql = `INSERT INTO contains VALUES(?, ?, ?)`;
+        await promisePool.query(sql, [book_isbn, shopping_basket_basket_id, number]);
+        console.log('contains inserted');
+    },
+    
+}

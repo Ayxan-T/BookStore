@@ -28,7 +28,14 @@
             </tr>
           {{/each}}
           <tr>
-            <td colspan="7"><button>Add</button></td>
+            <form method="POST" action="/insert/book">
+              <td><input name="isbn" value=""></td>
+              <td><input name="title" value=""></td>
+              <td><input name="year" value=""></td>
+              <td><input name="category" value=""></td>
+              <td><input name="price_dollars" value=""></td>
+              <td colspan="5"><button type="submit">Add</button></td>
+            </form>
           </tr>
     </table>
 </div>
@@ -54,7 +61,12 @@
             </tr>
           {{/each}}
           <tr>
-            <td colspan="5"><button>Add</button></td>
+            <form method="POST" action="/insert/author">
+              <td><input name="name" value=""></td>
+              <td><input name="address" value=""></td>
+              <td><input name="url" value=""></td>
+              <td colspan="5"><button type="submit">Add</button></td>
+            </form>
           </tr>
     </table>
 </div>
@@ -80,7 +92,12 @@
             </tr>
           {{/each}}
           <tr>
-            <td colspan="5"><button>Add</button></td>
+            <form method="POST" action="/insert/award">
+              <td><input name="id" value=""></td>
+              <td><input name="name" value=""></td>
+              <td><input name="year" value=""></td>
+              <td colspan="5"><button type="submit">Add</button></td>
+            </form>
           </tr>
     </table>
 </div>
@@ -106,7 +123,12 @@
             </tr>
           {{/each}}
           <tr>
-            <td colspan="5"><button>Add</button></td>
+            <form method="POST" action="/insert/warehouse">
+              <td><input name="code" value=""></td>
+              <td><input name="phone" value=""></td>
+              <td><input name="address" value=""></td>
+              <td colspan="5"><button type="submit">Add</button></td>
+            </form>
           </tr>
     </table>
 </div>
@@ -132,7 +154,12 @@
             </tr>
           {{/each}}
           <tr>
-            <td colspan="5"><button>Add</button></td>
+            <form method="POST" action="/insert/inventory">
+              <td><input name="book_isbn" value=""></td>
+              <td><input name="warehouse_code" value=""></td>
+              <td><input name="number" value=""></td>
+              <td colspan="5"><button type="submit">Add</button></td>
+            </form>
           </tr>
     </table>
 </div>
@@ -156,7 +183,12 @@
             </tr>
           {{/each}}
           <tr>
-            <td colspan="5"><button>Add</button></td>
+            <form method="POST" action="/insert/contains">
+              <td><input name="book_isbn" value=""></td>
+              <td><input name="shopping_basket_basket_id" value=""></td>
+              <td><input name="number" value=""></td>
+              <td colspan="5"><button type="submit">Add</button></td>
+            </form>
           </tr>
     </table>
 </div>
