@@ -1,16 +1,28 @@
-<span>User: {{userRole}} {{userId}}</span>
-<form method='get' action="/logout">
-    <button type="submit">Log out</button>
-</form><hr>
-<div class="dbTable">
-    <table>
+<div class="container my-4">
+  <header class="d-flex justify-content-between align-items-center mb-4">
+    <span class="h5">User: {{userRole}} {{userId}}</span>
+    <form method="get" action="/logout">
+      <button type="submit" class="btn btn-danger">Log out</button>
+    </form>
+  </header>
+  <hr>
+
+  <!-- Books Table -->
+  <section class="mb-5">
+    <h2 class="text-center mb-3">Books</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
           <tr>
-            <td><b>ISBN</b></td>
-            <td><b>Title</b></td>
-            <td><b>Year</b></td>
-            <td><b>Category</b></td>
-            <td><b>Price($)</b></td>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Category</th>
+            <th>Price($)</th>
+            <th colspan="2">Actions</th>
           </tr>
+        </thead>
+        <tbody>
           {{#each books}}
             <tr>
               <td>{{isbn}}</td>
@@ -18,183 +30,244 @@
               <td>{{year}}</td>
               <td>{{category}}</td>
               <td>{{price_dollars}}</td>
-              <td><button>Edit</button></td>
+              <td><button class="btn btn-primary btn-sm">Edit</button></td>
               <td>
                 <form method="POST" action="/delete/book">
                   <input type="hidden" name="code" value="{{isbn}}">
-                  <button type="submit">Delete</button>
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               </td>
             </tr>
           {{/each}}
           <tr>
             <form method="POST" action="/insert/book">
-              <td><input name="isbn" value=""></td>
-              <td><input name="title" value=""></td>
-              <td><input name="year" value=""></td>
-              <td><input name="category" value=""></td>
-              <td><input name="price_dollars" value=""></td>
-              <td colspan="5"><button type="submit">Add</button></td>
+              <td><input name="isbn" class="form-control" placeholder="ISBN"></td>
+              <td><input name="title" class="form-control" placeholder="Title"></td>
+              <td><input name="year" class="form-control" placeholder="Year"></td>
+              <td><input name="category" class="form-control" placeholder="Category"></td>
+              <td><input name="price_dollars" class="form-control" placeholder="Price"></td>
+              <td colspan="2">
+                <button type="submit" class="btn btn-success btn-sm">Add</button>
+              </td>
             </form>
           </tr>
-    </table>
-</div>
-<div class="dbTable">
-    <table>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Authors Table -->
+  <section class="mb-5">
+    <h2 class="text-center mb-3">Authors</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
           <tr>
-            <td><b>Name</b></td>
-            <td><b>Address</b></td>
-            <td><b>Url</b></td>
+            <th>Name</th>
+            <th>Address</th>
+            <th>URL</th>
+            <th colspan="2">Actions</th>
           </tr>
+        </thead>
+        <tbody>
           {{#each authors}}
             <tr>
               <td>{{name}}</td>
               <td>{{address}}</td>
-              <td><a href="https://{{url}}">Wikipedia.org</a></td>
-              <td><button>Edit</button></td>
+              <td><a href="https://{{url}}" target="_blank" class="text-decoration-none">Wikipedia.org</a></td>
+              <td><button class="btn btn-primary btn-sm">Edit</button></td>
               <td>
                 <form method="POST" action="/delete/author">
                   <input type="hidden" name="code" value="{{name}}">
-                  <button type="submit">Delete</button>
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               </td>
             </tr>
           {{/each}}
           <tr>
             <form method="POST" action="/insert/author">
-              <td><input name="name" value=""></td>
-              <td><input name="address" value=""></td>
-              <td><input name="url" value=""></td>
-              <td colspan="5"><button type="submit">Add</button></td>
+              <td><input name="name" class="form-control" placeholder="Name"></td>
+              <td><input name="address" class="form-control" placeholder="Address"></td>
+              <td><input name="url" class="form-control" placeholder="URL"></td>
+              <td colspan="2">
+                <button type="submit" class="btn btn-success btn-sm">Add</button>
+              </td>
             </form>
           </tr>
-    </table>
-</div>
-<div class="dbTable">
-    <table>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Awards Table -->
+  <section class="mb-5">
+    <h2 class="text-center mb-3">Awards</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
           <tr>
-            <td><b>Id</b></td>
-            <td><b>Name</b></td>
-            <td><b>Year</b></td>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Year</th>
+            <th colspan="2">Actions</th>
           </tr>
+        </thead>
+        <tbody>
           {{#each awards}}
             <tr>
               <td>{{id}}</td>
               <td>{{name}}</td>
               <td>{{year}}</td>
-              <td><button>Edit</button></td>
+              <td><button class="btn btn-primary btn-sm">Edit</button></td>
               <td>
                 <form method="POST" action="/delete/award">
                   <input type="hidden" name="code" value="{{id}}">
-                  <button type="submit">Delete</button>
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               </td>
             </tr>
           {{/each}}
           <tr>
             <form method="POST" action="/insert/award">
-              <td><input name="id" value=""></td>
-              <td><input name="name" value=""></td>
-              <td><input name="year" value=""></td>
-              <td colspan="5"><button type="submit">Add</button></td>
+              <td><input name="id" class="form-control" placeholder="Id"></td>
+              <td><input name="name" class="form-control" placeholder="Name"></td>
+              <td><input name="year" class="form-control" placeholder="Year"></td>
+              <td colspan="2">
+                <button type="submit" class="btn btn-success btn-sm">Add</button>
+              </td>
             </form>
           </tr>
-    </table>
-</div>
-<div class="dbTable">
-    <table>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Warehouses Table -->
+  <section class="mb-5">
+    <h2 class="text-center mb-3">Warehouses</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
           <tr>
-            <td><b>Code</b></td>
-            <td><b>Phone</b></td>
-            <td><b>Address</b></td>
+            <th>Code</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th colspan="2">Actions</th>
           </tr>
+        </thead>
+        <tbody>
           {{#each warehouses}}
             <tr>
               <td>{{code}}</td>
               <td>{{phone}}</td>
               <td>{{address}}</td>
-              <td><button>Edit</button></td>
+              <td><button class="btn btn-primary btn-sm">Edit</button></td>
               <td>
                 <form method="POST" action="/delete/warehouse">
                   <input type="hidden" name="code" value="{{code}}">
-                  <button type="submit">Delete</button>
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               </td>
             </tr>
           {{/each}}
           <tr>
             <form method="POST" action="/insert/warehouse">
-              <td><input name="code" value=""></td>
-              <td><input name="phone" value=""></td>
-              <td><input name="address" value=""></td>
-              <td colspan="5"><button type="submit">Add</button></td>
+              <td><input name="code" class="form-control" placeholder="Code"></td>
+              <td><input name="phone" class="form-control" placeholder="Phone"></td>
+              <td><input name="address" class="form-control" placeholder="Address"></td>
+              <td colspan="2">
+                <button type="submit" class="btn btn-success btn-sm">Add</button>
+              </td>
             </form>
           </tr>
-    </table>
-</div>
-<div class="dbTable">
-    <table>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Inventory Table -->
+  <section class="mb-5">
+    <h2 class="text-center mb-3">Inventory</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
           <tr>
-            <td><b>Book ISBN</b></td>
-            <td><b>Warehouse Code</b></td>
-            <td><b>Number of copies</b></td>
+            <th>Book ISBN</th>
+            <th>Warehouse Code</th>
+            <th>Number of Copies</th>
+            <th colspan="2">Actions</th>
           </tr>
+        </thead>
+        <tbody>
           {{#each inventory}}
             <tr>
               <td>{{book_isbn}}</td>
               <td>{{warehouse_code}}</td>
               <td>{{number}}</td>
-              <td><button>Edit</button></td>
+              <td><button class="btn btn-primary btn-sm">Edit</button></td>
               <td>
                 <form method="POST" action="/delete/inventory">
                   <input type="hidden" name="code" value="{{book_isbn}}">
-                  <button type="submit">Delete</button>
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               </td>
             </tr>
           {{/each}}
           <tr>
             <form method="POST" action="/insert/inventory">
-              <td><input name="book_isbn" value=""></td>
-              <td><input name="warehouse_code" value=""></td>
-              <td><input name="number" value=""></td>
-              <td colspan="5"><button type="submit">Add</button></td>
+              <td><input name="book_isbn" class="form-control" placeholder="Book ISBN"></td>
+              <td><input name="warehouse_code" class="form-control" placeholder="Warehouse Code"></td>
+              <td><input name="number" class="form-control" placeholder="Number"></td>
+              <td colspan="2">
+                <button type="submit" class="btn btn-success btn-sm">Add</button>
+              </td>
             </form>
           </tr>
-    </table>
-</div>
-<div class="dbTable">
-    <table>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Contains Table -->
+  <section class="mb-5">
+    <h2 class="text-center mb-3">Shopping Basket</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
           <tr>
-            <td><b>Book ISBN</b></td>
-            <td><b>Shopping basket Id</b></td>
-            <td><b>Number</b></td>
+            <th>Book ISBN</th>
+            <th>Shopping Basket Id</th>
+            <th>Number</th>
+            <th colspan="2">Actions</th>
           </tr>
+        </thead>
+        <tbody>
           {{#each contains}}
             <tr>
               <td>{{book_isbn}}</td>
               <td>{{shopping_basket_basket_id}}</td>
               <td>{{number}}</td>
-              <td><button>Edit</button></td>
-              <td><form method="POST" action="/delete/contains">
+              <td><button class="btn btn-primary btn-sm">Edit</button></td>
+              <td>
+                <form method="POST" action="/delete/contains">
                   <input type="hidden" name="code" value="{{book_isbn}}">
-                  <button type="submit">Delete</button>
-                </form></td>
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
             </tr>
           {{/each}}
           <tr>
             <form method="POST" action="/insert/contains">
-              <td><input name="book_isbn" value=""></td>
-              <td><input name="shopping_basket_basket_id" value=""></td>
-              <td><input name="number" value=""></td>
-              <td colspan="5"><button type="submit">Add</button></td>
+              <td><input name="book_isbn" class="form-control" placeholder="Book ISBN"></td>
+              <td><input name="shopping_basket_basket_id" class="form-control" placeholder="Shopping Basket Id"></td>
+              <td><input name="number" class="form-control" placeholder="Number"></td>
+              <td colspan="2">
+                <button type="submit" class="btn btn-success btn-sm">Add</button>
+              </td>
             </form>
           </tr>
-    </table>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </div>
-<div class="dbTable"></div>
-<div class="dbTable"></div>
-<div class="dbTable"></div>
-<div class="dbTable"></div>
-<div class="dbTable"></div>
-
