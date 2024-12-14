@@ -8,37 +8,56 @@ router.use(cookieParser());
 
 router.post('/book', async (req, res) => {
     if (req.cookies.user) {
-        await deleteSql.deleteBookByIsbn(req.body.isbn);
+        await deleteSql.deleteAwardedto(req.body.code);
+        await deleteSql.deleteWrittenby(req.body.code);
+        await deleteSql.deleteBookByIsbn(req.body.code);
+        res.redirect('/');
+    } else {
         res.redirect('/');
     }
 })
 router.post('/author', async (req, res) => {
     if (req.cookies.user) {
-        await deleteSql.deleteAuthorByName(req.body.name);
+        await deleteSql.deleteReceivedby(req.body.code);
+        await deleteSql.deleteWrittenby(req.body.code);
+        await deleteSql.deleteAuthorByName(req.body.code);
+        res.redirect('/');
+    } else {
         res.redirect('/');
     }
 })
 router.post('/award', async (req, res) => {
     if (req.cookies.user) {
-        await deleteSql.deleteAwardById(req.body.id);
+        await deleteSql.deleteReceivedby(req.body.code);
+        await deleteSql.deleteAwardedto(req.body.code);
+        await deleteSql.deleteAwardById(req.body.code);
+        res.redirect('/');
+    } else {
         res.redirect('/');
     }
 })
 router.post('/warehouse', async (req, res) => {
     if (req.cookies.user) {
+        await deleteSql.deleteInventory(req.body.code);
         await deleteSql.deleteWarehouseByCode(req.body.code);
+        res.redirect('/');
+    } else {
         res.redirect('/');
     }
 })
 router.post('/inventory', async (req, res) => {
     if (req.cookies.user) {
-        await deleteSql.deleteInventoryByBookIsbn(req.body.book_isbn);
+        await deleteSql.deleteInventory(req.body.code);
+        res.redirect('/');
+    } else {
         res.redirect('/');
     }
 })
 router.post('/contains', async (req, res) => {
     if (req.cookies.user) {
-        await deleteSql.deleteContainsByBookIsbn(req.body.book_isbn);
+        await deleteSql.deleteContains(req.body.code);
+        res.redirect('/');
+    } else {
         res.redirect('/');
     }
 })

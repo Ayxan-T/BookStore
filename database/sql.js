@@ -76,15 +76,37 @@ export const deleteSql = {
         await promisePool.query(sql, [code]);
         console.log("deleted");
     },
-    deleteInventoryByBookIsbn: async (code) => {
-        const sql = `delete from inventory where book_isbn = ?`;
-        await promisePool.query(sql, [code]);
-        console.log("deleted");
+    deleteAwardedto: async (code) => {
+        const sql = `delete from awarded_to where book_isbn = ? or award_id = ?`;
+        await promisePool.query(sql, [code, code]);
+        console.log('awarded to deleted');
     },
-    deleteContainsByBookIsbn: async (code) => {
-        const sql = `delete from contains where book_isbn = ?`;
-        await promisePool.query(sql, [code]);
-        console.log("deleted");
+    deleteReceivedby: async (code) => {
+        const sql = `delete from received_by where author_name = ? or award_id = ?`;
+        await promisePool.query(sql, [code, code]);
+        console.log('receivedby deleted.')
     },
-
+    deleteWrittenby: async (code) => {
+        const sql = `delete from written_by where author_name = ? or book_isbn = ?`;
+        await promisePool.query(sql, [code, code]);
+        console.log('written to deleted');
+    },
+    deleteInventory: async (code) => {
+        const sql = `delete from inventory where book_isbn = ? or warehouse_code = ?`;
+        await promisePool.query(sql, [code, code]);
+        console.log('inventory deleted')
+    },
+    deleteContains: async (code) => {
+        // delete from the baskets that has not been ordered yet (We don't need to delete from past ordered baskets)
+        const sql = `
+            DELETE FROM contains
+            WHERE (book_isbn = ? OR shopping_basket_basket_id = ?) AND shopping_basket_basket_id IN (
+                SELECT basket_id
+                FROM basket
+                WHERE order_date IS NOT NULL
+            );
+        `;
+        await promisePool.query(sql, [code, code]);
+        console.log('contains deleted')
+    }
 }
