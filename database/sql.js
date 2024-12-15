@@ -31,6 +31,7 @@ export const selectSql = {
     getAuthors: async () => {
         const sql = `select * from author`;
         const [result] = await promisePool.query(sql);
+        console.log(result);
         return result;
     },
     getAwards: async () => {
@@ -82,8 +83,12 @@ export const deleteSql = {
         console.log('awarded to deleted');
     },
     deleteReceivedby: async (code) => {
-        const sql = `delete from received_by where author_name = ? or award_id = ?`;
-        await promisePool.query(sql, [code, code]);
+        let sql;
+        if (typeof code === 'string')
+            sql = `delete from received_by where author_name = ?`;
+        else 
+            sql = `delete from received_by where award_id = ?`;
+        await promisePool.query(sql, [code]);
         console.log('receivedby deleted.')
     },
     deleteWrittenby: async (code) => {
@@ -141,6 +146,37 @@ export const insertSql = {
         const sql = `INSERT INTO contains VALUES(?, ?, ?)`;
         await promisePool.query(sql, [book_isbn, shopping_basket_basket_id, number]);
         console.log('contains inserted');
+    },    
+}
+
+export const updateSql = {
+    updateBook: async (isbn, title, year, price_dollars, category) => {
+        const sql = `
+            UPDATE book
+            SET isbn = ?, title = ?, year = ?, price_dollars = ?, category = ?
+            WHERE isbn = ? 
+        `
+        await promisePool.query(sql, [isbn, title, year, price_dollars, category, isbn]);
+        console.log('book updated')
+    }, 
+
+    updateAuthor: async (Name, address, url) => {
+        const sql = `
+            UPDATE author
+            SET name = ?, address = ?, url = ?
+            WHERE name = ? 
+        `
+        await promisePool.query(sql, [Name, address, url, Name]);
+        console.log('author updated');
     },
-    
+
+    updateWarehouse: async (code, phone, address) => {
+        const sql = `
+            UPDATE warehouse
+            SET code = ?, phone = ?, address = ?
+            WHERE code = ? 
+        `;
+        await promisePool.query(sql, [code, phone, address, code]);
+        console.log('warehouse updated');
+    }
 }

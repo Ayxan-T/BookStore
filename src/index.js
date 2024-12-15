@@ -9,6 +9,7 @@ import costumerRouter from '../routes/costumer';
 import logoutRouter from '../routes/logout';
 import deleteRouter from '../routes/delete';
 import insertRouter from '../routes/insert';
+import updateRouter from '../routes/update';
 //
 
 const PORT = 3000;  
@@ -37,6 +38,7 @@ app.use('/costumer', costumerRouter);
 app.use("/logout", logoutRouter);
 app.use("/delete", deleteRouter);
 app.use("/insert", insertRouter);
+app.use("/update", updateRouter);
 //
 
 app.listen(PORT, () => {

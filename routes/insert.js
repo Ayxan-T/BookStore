@@ -18,7 +18,7 @@ router.post('/book', async (req, res) => {
 router.post('/author', async (req, res) => {
     if (req.cookies.user) {
         console.log(req.body)
-        await insertSql.insertBook(req.body.name, req.body.address, req.body.url);
+        await insertSql.insertAuthor(req.body.name, req.body.address, req.body.url);
         res.redirect('/');
     } else {
         res.redirect('/');
@@ -27,7 +27,7 @@ router.post('/author', async (req, res) => {
 router.post('/award', async (req, res) => {
     if (req.cookies.user) {
         console.log(req.body)
-        await insertSql.insertBook(req.body.id, req.body.name, req.body.year);
+        await insertSql.insertAward(req.body.id, req.body.name, req.body.year);
         res.redirect('/');
     } else {
         res.redirect('/');
