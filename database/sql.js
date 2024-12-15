@@ -53,6 +53,36 @@ export const selectSql = {
         const sql = `select * from contains`;
         const [result] = await promisePool.query(sql);
         return result;
+    },
+
+    getBooksAndAuthors: async () => {
+        const sql = `
+        SELECT book.*, 
+            author.name AS author_name, 
+            author.url AS author_url, 
+            award.name AS award_name, 
+            award.year AS award_year
+        FROM book
+        LEFT JOIN written_by ON book.isbn = written_by.book_isbn
+        LEFT JOIN author ON written_by.author_name = author.name
+        LEFT JOIN awarded_to ON book.isbn = awarded_to.book_isbn
+        LEFT JOIN award ON awarded_to.award_id = award.id;
+
+        `;
+        const [result] = await promisePool.query(sql);
+        return result;
+    },
+    getBooksAndAuthorsAndAwardByName: async (name) => {
+        const sql = `SELECT book.*, author.name AS author_name, author.url AS author_url, award.name AS award_name, award.year AS award_year
+            FROM book
+            JOIN written_by ON book.isbn = written_by.book_isbn
+            JOIN author ON written_by.author_name = author.name
+            LEFT JOIN awarded_to ON book.isbn = awarded_to.book_isbn
+            LEFT JOIN award ON awarded_to.award_id = award.id
+            WHERE book.title LIKE CONCAT('%', ?, '%') OR author.name LIKE CONCAT('%', ?, '%')  OR award.name LIKE CONCAT('%', ?, '%') ;
+        `;
+        const [result] = await promisePool.query(sql, [name, name, name]);
+        return result;
     }
 }
 

@@ -1,0 +1,79 @@
+  <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+        <!-- Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<div class="container my-4">
+  <header class="d-flex justify-content-between align-items-center mb-4">
+    <span class="h5">User: {{userRole}} {{userId}}</span>
+    <div class="d-flex gap-2">
+      <form method="get" action="/cart-reservation" class="me-2">
+        <button type="submit" class="btn btn-success">Cart &amp; Reservation</button>
+      </form>
+      <form method="get" action="/logout">
+        <button type="submit" class="btn btn-danger">Log out</button>
+      </form>
+    </div>
+  </header>
+  <hr>
+
+  <!-- Search bar -->
+  <section class="mb-4">
+  <div class="input-group">
+    <form method="post" action="/costumer/home/search" class="w-100 d-flex">
+      <input type="text" class="form-control rounded-left" id="searchBar" placeholder="Search for books..." name="search" value="">
+      <button class="btn btn-primary rounded-right ml-2" type="submit" id="searchButton">Search</button>
+    </form>
+  </div>
+</section>
+
+
+
+  <!-- Catalog -->
+  <section>
+    <h2 class="text-center mb-3">Catalog</h2>
+    <div class="row">
+    {{#each books}}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{title}}</h5>
+          <p class="card-text mb-1">
+            <strong>Author:</strong> 
+            <a target="_blank" href="https://{{author_url}}">{{author_name}}</a>
+          </p>
+          <p class="card-text mb-1"><strong>Category:</strong> {{category}}</p>
+          <div class="mt-auto">
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#awards{{isbn}}">Awards</button>
+            <button class="btn btn-success btn-sm mr-2">Reserve</button>
+            <button class="btn btn-primary btn-sm">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="awards{{isbn}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">'{{title}}' by {{author_name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+              <h5>Award: </h5><p>{{award_name}}</p><br>
+              <h5>Year: </h5><p>{{award_year}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+    </div>
+  </section>
+
+</div>

@@ -5,7 +5,7 @@ import expressSession from "express-session";
 
 import loginRouter from '../routes/login';
 import adminRouter from '../routes/admin';
-import costumerRouter from '../routes/costumer';
+import costumerHomeRouter from '../routes/costumer-home';
 import logoutRouter from '../routes/logout';
 import deleteRouter from '../routes/delete';
 import insertRouter from '../routes/insert';
@@ -34,7 +34,7 @@ app.use(logger('dev'));
 
 app.use('/', loginRouter);
 app.use('/admin', adminRouter);
-app.use('/costumer', costumerRouter);
+app.use('/costumer/home', costumerHomeRouter);
 app.use("/logout", logoutRouter);
 app.use("/delete", deleteRouter);
 app.use("/insert", insertRouter);

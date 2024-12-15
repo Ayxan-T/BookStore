@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         if (req.cookies.user.role === 'admin')
             res.redirect('/admin');
         else if (req.cookies.user.role === 'costumer')
-            res.redirect('/costumer');
+            res.redirect('/costumer/home');
     } else
     res.render('login');
 });
